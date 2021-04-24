@@ -3,13 +3,15 @@ package main
 import "fmt"
 
 func twoSum(nums []int, target int) []int {
-	targetLen := len(nums)
+	hash := map[int]int{}
+	another := 0
+
 	for i := range nums {
-		for j := i + 1; j < targetLen; j++ {
-			if nums[i]+nums[j] == target {
-				return []int{i, j}
-			}
+		another = target - nums[i]
+		if j, ok := hash[another]; ok {
+			return []int{i, j}
 		}
+		hash[nums[i]] = i
 	}
 
 	return []int{}
